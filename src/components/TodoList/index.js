@@ -5,7 +5,7 @@ import Todo from '../Todo';
 import {v4 as uuidv4 } from 'uuid'
 
 import { todoFilterSearch } from '../../redux/selectors'
-import { addTodo } from '../../redux/actions';
+import todoListSlice from '../../redux/slice/TodoSlice';
 
 export default function TodoList() {
 
@@ -19,23 +19,14 @@ export default function TodoList() {
   }  
 
   const handelAddButtonClick = () => {
-    // dispatch({
-    //   type: 'todoList/addTodo',
-    //   payload: {
-    //     id: uuidv4,
-    //     name: todoName,
-    //     completed: false,
-    //     priority: priority,
-    //   }
-    // })
     if(todoName === '' || todoName === null) {
       return; 
     }
-    dispatch(addTodo({
-        id: uuidv4(),
-        name: todoName,
-        completed: false,
-        priority: priority,
+    dispatch(todoListSlice.actions.addTodo({
+      id: uuidv4(),
+      name: todoName,
+      completed: false,
+      priority: priority,
     }))
     resetTodoName()
   }
